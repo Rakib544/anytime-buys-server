@@ -2,8 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
-const ObjectId = require('mongodb').ObjectID;
-const { ObjectID } = require('bson');
+const ObjectID = require('mongodb').ObjectID;
 app.use(cors());
 app.use(express.json());
 
