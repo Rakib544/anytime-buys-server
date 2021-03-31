@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
 })
 
 client.connect(err => {
+    
     const productsCollection = client.db(`${process.env.DB_NAME}`).collection("products");
     const orderCollection = client.db(`${process.env.DB_NAME}`).collection("orders");
 
@@ -41,29 +42,37 @@ client.connect(err => {
     //handling delete product from admin page functionality
     app.delete('/deleteProduct', (req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
-        productsCollection.deleteOne({_id: ObjectID(req.body.id)})
-        .then(result => {
-            res.send(result.deletedCount > 0)
-        })
+        productsCollection.deleteOne({ _id: ObjectID(req.body.id) })
+            .then(result => {
+                res.send(result.deletedCount > 0)
+            })
     })
 
     //handling checkout item functionality
     app.get('/checkout/:id', (req, res) => {
-        const productId = {id: req.params.id};
-        productsCollection.find({_id: ObjectID(productId.id)})
-        .toArray((err, product) => {
-            res.send(product[0])
-        })
+        const productId = { id: req.params.id };
+        productsCollection.find({ _id: ObjectID(productId.id) })
+            .toArray((err, product) => {
+                res.send(product[0])
+            })
     })
 
     //handling order item functionality
     app.post('/addOrder', (req, res) => {
         orderCollection.insertOne(req.body)
-        .then(result => {
-            res.send(result.insertedCount > 0)
-        })
+            .then(result => {
+                res.send(result.insertedCount > 0)
+            })
     })
-    
+
+    //loading order information sorting by email
+    app.get('/orderHistory', (req, res) => {
+        orderCollection.find({email: req.query.email})
+            .toArray((err, products) => {
+                res.send(products)
+            })
+    })
+
 });
 
 
