@@ -63,7 +63,7 @@ client.connect(err => {
 
     //loading order information sorting by email
     app.get('/orderHistory', (req, res) => {
-        orderCollection.find({ email: req.query.email })
+        ordersCollection.find({ email: req.query.email })
             .toArray((err, products) => {
                 res.send(products)
             })
