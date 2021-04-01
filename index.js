@@ -8,17 +8,14 @@ app.use(express.json());
 
 require('dotenv').config()
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.acxxo.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
 app.get('/', (req, res) => {
     res.send('Hello I am working with my e-commerce project');
 })
 
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.6vkjy.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
-    
-    const productsCollection = client.db(`${process.env.DB_NAME}`).collection("products");
-    const orderCollection = client.db(`${process.env.DB_NAME}`).collection("orders");
+    const productsCollection = client.db("AnytimeBuys").collection("products");
 
     //handling add product from admin panel functionality
     app.post('/addProduct', (req, res) => {
@@ -65,13 +62,11 @@ client.connect(err => {
 
     //loading order information sorting by email
     app.get('/orderHistory', (req, res) => {
-        orderCollection.find({email: req.query.email})
+        orderCollection.find({ email: req.query.email })
             .toArray((err, products) => {
                 res.send(products)
             })
     })
-
 });
-
 
 app.listen(process.env.PORT || 8080);
