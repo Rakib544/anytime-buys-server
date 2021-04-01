@@ -55,7 +55,7 @@ client.connect(err => {
 
     //handling order item functionality
     app.post('/addOrder', (req, res) => {
-        orderCollection.insertOne(req.body)
+        ordersCollection.insertOne(req.body)
             .then(result => {
                 res.send(result.insertedCount > 0)
             })
