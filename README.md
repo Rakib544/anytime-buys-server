@@ -10,7 +10,13 @@ https://anytime-buys.web.app/
 * [Setup](#setup)
 
 ## General info
-This project is a simple Fullstack E-commerce application. In this application, there is a admin panel system. If you are login in this application you can add products and delete products. You can also buy any products and It will save in mongodb database.And You can also see your previous product which you  bought in the previous time.     
+t's an eCommerce website where users can order products. All the features of these websites are listed here:
+1. Admin can see all order lists.
+2. Admin can add products.
+3. Admin can delete products.
+4. User can order products.
+5. User can see his/her previous order history.
+   
 	
 ## Technologies
 Project is created with:
@@ -30,3 +36,6 @@ $ cd ../fresh-velly
 $ npm install
 $ npm start
 ```
+
+# Back-End Repository
+https://github.com/Rakib544/anytime-buys-clinet
